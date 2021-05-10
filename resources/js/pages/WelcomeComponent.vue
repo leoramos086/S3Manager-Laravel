@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container has-background-white">
-      <header-welcome></header-welcome>
+      <header-welcome @refresh="refresh"></header-welcome>
       <breadcrumb-welcome></breadcrumb-welcome>
 
       <div class="content content-image">
@@ -15,6 +15,9 @@
           :key="'cardImage' + index"
           :filename="file"
         ></card-image>
+        <p class="has-text-centered" v-if="!isLoading && files.length <= 0">
+          Empty
+        </p>
       </div>
     </div>
   </section>
@@ -25,7 +28,7 @@ import HeaderWelcome from "../components/HeaderWelcome";
 import BreadcrumbWelcome from "../components/BreadcrumbWelcome";
 import CardImage from "../components/CardImage";
 
-import http from "../services/s3-http";
+import $http from "../services/s3-http";
 
 export default {
   components: {
@@ -41,20 +44,29 @@ export default {
   },
   methods: {
     getFolder() {
-      http
+      this.isLoading = true;
+      $http
         .get("/files")
         .then((response) => {
-          this.files = response.data;
-          console.log(this.files);
+          if (!response.data.files) {
+            this.$buefy.notification.open({
+              message: "Erro na leituras dos arquivos",
+              type: "is-danger",
+            });
+            return;
+          }
+          this.files = response.data.files;
         })
         .catch((error) => {
           console.log(error);
         })
         .finally(() => (this.isLoading = false));
     },
+    refresh() {
+      this.getFolder();
+    },
   },
   mounted() {
-    this.isLoading = true;
     this.getFolder();
   },
 };

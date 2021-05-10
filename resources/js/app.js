@@ -13,6 +13,8 @@ import Buefy from 'buefy';
 
 Vue.use(Buefy, {
     defaultIconPack: 'fas',
+    defaultNotificationPosition: 'is-top-right',
+    defaultNotificationDuration: 3000
     // ...
 });
 

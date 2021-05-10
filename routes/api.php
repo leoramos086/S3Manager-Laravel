@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/files', [S3Controller::class, 'getFiles']);
+
+Route::post('/uploads', [S3Controller::class, 'uploads']);
