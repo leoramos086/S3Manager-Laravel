@@ -8,7 +8,7 @@
         <b-loading
           :is-full-page="false"
           v-model="isLoading"
-          :can-cancel="true"
+          :can-cancel="false"
         ></b-loading>
         <card-image
           v-for="(file, index) in files"
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import HeaderWelcome from "../components/HeaderWelcome";
-import BreadcrumbWelcome from "../components/BreadcrumbWelcome";
-import CardImage from "../components/CardImage";
+import HeaderWelcome from "./Components/Header";
+import BreadcrumbWelcome from "./Components/Breadcrumb";
+import CardImage from "./Components/CardImage";
 
-import $http from "../services/s3-http";
+import $http from "../../services/s3-http";
 
 export default {
   components: {

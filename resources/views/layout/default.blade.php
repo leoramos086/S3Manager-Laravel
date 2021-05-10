@@ -5,21 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"> --}}
     <title>@yield('title')</title>
     <script>
-        window.Laravel = @json(['csrfToken' => csrf_token(), 'baseUrl' => url('/')], JSON_PRETTY_PRINT)
-
+        window.Laravel = @json(['csrfToken' => csrf_token(), 'baseUrl' => url('/')])
     </script>
 </head>
 
 <body>
     <div id="app">
-
         {{-- @include('components.navbar') --}}
-
         @yield('content')
-
     </div>
 
     @section('scripts')

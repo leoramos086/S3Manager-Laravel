@@ -3,5 +3,5 @@
 @section('title', 'Home')
 
 @section('content')
-    <welcome-component></welcome-component>
+    <home-component></home-component>
 @endsection

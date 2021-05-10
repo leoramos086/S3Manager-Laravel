@@ -21,7 +21,11 @@
 
       <b-field>
         <div class="control">
-          <b-button type="is-light" icon-left="redo-alt"></b-button>
+          <b-button
+            type="is-light"
+            icon-left="redo-alt"
+            @click.prevent="refresh"
+          ></b-button>
         </div>
       </b-field>
     </b-field>
@@ -29,7 +33,7 @@
 </template>
 
 <script>
-import { uploadFile } from "../services/s3-http";
+import { uploadFile } from "../../../services/s3-http";
 
 export default {
   data() {
@@ -57,7 +61,7 @@ export default {
             message: "Imagem salva com sucesso",
             type: "is-success",
           });
-          this.$emit('refresh');
+          this.refresh()
         })
         .catch((error) => {
           this.$buefy.notification.open({
@@ -69,6 +73,9 @@ export default {
           this.isUploading = false;
           ev.target.value = "";
         });
+    },
+    refresh() {
+      this.$emit("refresh");
     },
   },
 };
