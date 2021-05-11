@@ -13,6 +13,7 @@
         <card-image
           v-for="(file, index) in files"
           :key="'cardImage' + index"
+          @refresh="refresh"
           :filename="file"
         ></card-image>
         <p class="has-text-centered" v-if="!isLoading && files.length <= 0">
@@ -45,6 +46,7 @@ export default {
   methods: {
     getFolder() {
       this.isLoading = true;
+      this.files = []
       $http
         .get("/files")
         .then((response) => {

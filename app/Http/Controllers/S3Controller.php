@@ -26,7 +26,7 @@ class S3Controller extends Controller
 
             $isExists = Storage::disk('s3')->exists($request->file('uploadFile')->getClientOriginalName());
 
-            if($isExists) {
+            if ($isExists) {
                 return response()->json("Já existe um arquivo com mesmo nome na pasta", 406);
             }
 
@@ -37,19 +37,28 @@ class S3Controller extends Controller
             );
 
             return Storage::disk('s3')->url($path);
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-            // $upload = $request->file->store('/', 's3');
-
+    public function download(Request $request)
+    {
+        if ($request->path) {
+            return Storage::disk('s3')->download($request->path);
         }
 
+        // return response()->download($file);
+    }
+
+    public function delete(Request $request)
+    {
+        if ($request->path) {
+            if (Storage::disk('s3')->delete($request->path)) {
+                return response()->json(["ok" => true]);
+            } else {
+                return response()->json(["ok" => false], 500);
+            }
+        }
+
+        // return response()->download($file);
     }
 }

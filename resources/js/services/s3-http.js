@@ -21,3 +21,7 @@ export function uploadFile(file, setOpt) {
     formData.append("uploadFile", file);
     return http.post(options.url, formData);
 }
+
+export function deleteItem(file) {
+    return http.delete(`/delete?path=${encodeURI(file)}`);
+}

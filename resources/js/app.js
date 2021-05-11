@@ -6,14 +6,14 @@
 
 // import './bootstrap';
 
-import Vue from 'vue';
-import Buefy from 'buefy';
-
+import Vue from "vue";
+import Buefy from "buefy";
+import VueClipboard from "vue-clipboard2";
 // window.Vue = Vue;
-
+Vue.use(VueClipboard);
 Vue.use(Buefy, {
-    defaultIconPack: 'fas',
-    defaultNotificationPosition: 'is-top-right',
+    defaultIconPack: "fas",
+    defaultNotificationPosition: "is-top-right",
     defaultNotificationDuration: 3000
     // ...
 });
@@ -29,7 +29,7 @@ Vue.use(Buefy, {
 // const files = require.context('./pages', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('home-component', require('./pages/Home').default);
+Vue.component("home-component", require("./pages/Home").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,7 +38,5 @@ Vue.component('home-component', require('./pages/Home').default);
  */
 
 const app = new Vue({
-    el: '#app',
+    el: "#app"
 });
-
-
